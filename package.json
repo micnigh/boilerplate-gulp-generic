@@ -1,0 +1,17 @@
+{
+  "name": "gulp-frontend-tasks-example-generic",
+  "version": "1.0.0",
+  "description": "Skeleton and example of how you might use `gulp-frontend-tasks`",
+  "scripts": {},
+  "author": "Michael Nigh <contact@mnigh.com>",
+  "engine": "node 4.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "es5-shim": "^4.1.14",
+    "eslint": "^1.6.0",
+    "gulp": "^3.9.0",
+    "gulp-frontend-tasks": "micnigh/gulp-frontend-tasks",
+    "underscore": "^1.8.3"
+  }
+}
