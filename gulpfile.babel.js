@@ -114,12 +114,12 @@ gulp.task("build", [
   "build:js",
   "build:css",
   "build:spritesheet",
-])
+]);
 
 gulp.task("watch", [
   "watch:js",
   "watch:css",
   "watch:spritesheet",
-])
+]);
 
 gulp.task("default", ["watch"]);
