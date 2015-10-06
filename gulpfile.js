@@ -1,6 +1,8 @@
 var _ = require("underscore");
-var { argv } = require("yargs");
+var argv = require("yargs").argv;
 var gulp = require("gulp");
+
+var gft = require("gulp-frontend-tasks")(gulp);
 
 var buildEnv = process.env.BUILD_ENV;
 if (typeof process.env.BUILD_ENV === "undefined"){
@@ -20,7 +22,7 @@ var libs = [
   "es5-shim/es5-sham",
 ];
 
-require("gulp-frontend-tasks/js/")(gulp, {
+gft.generateTask("js", {
   taskName: "lib",
   entries: [
     "client/js/libs/entry.js",
@@ -38,7 +40,7 @@ require("gulp-frontend-tasks/js/")(gulp, {
   ],
 });
 
-require("gulp-frontend-tasks/js/")(gulp, {
+gft.generateTask("js", {
   taskName: "app",
   entries: [
     "client/js/src/*.js",
@@ -56,16 +58,16 @@ require("gulp-frontend-tasks/js/")(gulp, {
 });
 
 gulp.task("build:js", [
-  "build:js:browserify:lib",
-  "build:js:browserify:app"
+  "build:js:lib",
+  "build:js:app",
 ]);
 
 gulp.task("watch:js", [
   "watch:js:lib",
-  "watch:js:app"
+  "watch:js:app",
 ]);
 
-require("gulp-frontend-tasks/css/less/")(gulp, {
+gft.generateTask("css:less", {
   taskName: "app",
   entries: [
     "client/css/src/*.less",
@@ -84,14 +86,14 @@ require("gulp-frontend-tasks/css/less/")(gulp, {
 });
 
 gulp.task("build:css", [
-  "build:css:less:app"
+  "build:css:less:app",
 ]);
 
 gulp.task("watch:css", [
-  "watch:css:less:app"
+  "watch:css:less:app",
 ]);
 
-require("gulp-frontend-tasks/spritesheet/less/")(gulp, {
+gft.generateTask("spritesheet:less", {
   taskName: "app",
   src: "client/sprites/*.png",
   dest: distPath + "/css/",
@@ -103,11 +105,11 @@ require("gulp-frontend-tasks/spritesheet/less/")(gulp, {
 });
 
 gulp.task("build:spritesheet", [
-  "build:spritesheet:less:app"
+  "build:spritesheet:less:app",
 ]);
 
 gulp.task("watch:spritesheet", [
-  "watch:spritesheet:less:app"
+  "watch:spritesheet:less:app",
 ]);
 
 gulp.task("build", [
