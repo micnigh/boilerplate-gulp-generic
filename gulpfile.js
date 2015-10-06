@@ -1,3 +1,4 @@
+var browsersync = require("browser-sync");
 var _ = require("underscore");
 var argv = require("yargs").argv;
 var gulp = require("gulp");
@@ -12,6 +13,11 @@ if (typeof process.env.BUILD_ENV === "undefined"){
 
 _.extend(process.env, {
   BUILD_ENV: buildEnv,
+});
+
+var bsApp = browsersync.create();
+bsApp.init({
+  server: "./server/public/",
 });
 
 var distPath = "server/public";
@@ -55,6 +61,7 @@ gft.generateTask("js", {
   watch: [
     "client/js/src/*.js",
   ],
+  browsersync: bsApp,
 });
 
 gulp.task("build:js", [
@@ -79,10 +86,12 @@ gft.generateTask("css:less", {
   dest: distPath + "/css/",
   watch: [
     "client/css/src/**/*.less",
+    "!client/css/src/shared/sprites.less",
   ],
+  browsersync: bsApp,
   dependsOn: [
     "build:spritesheet:less:app",
-  ]
+  ],
 });
 
 gulp.task("build:css", [
