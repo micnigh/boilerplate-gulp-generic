@@ -16,9 +16,6 @@ _.extend(process.env, {
 });
 
 var bsApp = browsersync.create();
-bsApp.init({
-  server: "./server/public/",
-});
 
 var distPath = "server/public";
 
@@ -127,10 +124,18 @@ gulp.task("build", [
   "build:spritesheet",
 ]);
 
+gulp.task("watch:initBrowserify", function (done) {
+  bsApp.init({
+    server: "./server/public/",
+    logSnippet: false,
+  }, done);
+});
+
 gulp.task("watch", [
   "watch:js",
   "watch:css",
   "watch:spritesheet",
+  "watch:initBrowserify"
 ]);
 
 gulp.task("default", ["watch"]);
