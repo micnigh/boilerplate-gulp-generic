@@ -2,6 +2,7 @@ var browsersync = require("browser-sync");
 var _ = require("underscore");
 var argv = require("yargs").argv;
 var gulp = require("gulp");
+var nodemon = require("gulp-nodemon");
 
 var gft = require("gulp-frontend-tasks")(gulp);
 
@@ -41,6 +42,7 @@ gft.generateTask("js", {
   watch: [
     "client/js/libs/entry.js",
   ],
+  browsersync: bsApp,
 });
 
 gft.generateTask("js", {
@@ -124,10 +126,25 @@ gulp.task("build", [
   "build:spritesheet",
 ]);
 
+gulp.task("serve", [], function () {
+  nodemon({
+    watch: [
+      "server",
+    ],
+    ignore: [
+      "server/public/js/*.js*",
+      "server/public/css/*.css*",
+    ],
+    script: "server/index.js",
+    ext: "js html",
+  });
+});
+
 gulp.task("watch:initBrowserify", function (done) {
   bsApp.init({
-    server: "./server/public/",
     logSnippet: false,
+    open: false,
+    notify: false,
   }, done);
 });
 
@@ -135,7 +152,8 @@ gulp.task("watch", [
   "watch:js",
   "watch:css",
   "watch:spritesheet",
-  "watch:initBrowserify"
+  "watch:initBrowserify",
+  "serve",
 ]);
 
 gulp.task("default", ["watch"]);
