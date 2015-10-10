@@ -13,7 +13,6 @@ git add -A
 git commit -am "init commit"
 npm install
 npm install -g gulp # if not already installed globally
-gulp watch
 
 ```
 
