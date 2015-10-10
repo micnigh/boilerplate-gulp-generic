@@ -1,5 +1,4 @@
 var browsersync = require("browser-sync");
-var _ = require("underscore");
 var argv = require("yargs").argv;
 var gulp = require("gulp");
 var nodemon = require("gulp-nodemon");
@@ -7,15 +6,7 @@ var karma = require("karma");
 
 var gft = require("gulp-frontend-tasks")(gulp);
 
-var buildEnv = process.env.BUILD_ENV;
-if (typeof process.env.BUILD_ENV === "undefined"){
-  buildEnv = "development";
-  buildEnv = argv.production ? "production" : buildEnv;
-}
-
-_.extend(process.env, {
-  BUILD_ENV: buildEnv,
-});
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 var bsApp = browsersync.create();
 var bsTest = browsersync.create();

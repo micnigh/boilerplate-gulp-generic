@@ -22,6 +22,6 @@ npm install -g gulp # if not already installed globally
 gulp build # build all assets
 gulp watch # run dev server where assets are auto rebuilt and the browser is reloaded once build is complete
 gulp test # run tests
-BUILD_ENV=production gulp build # build all assets in production mode
+NODE_ENV=production gulp build # build all assets in production mode
 
 ```
