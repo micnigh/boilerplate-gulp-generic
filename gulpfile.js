@@ -127,6 +127,10 @@ gft.generateTask("css:scss", {
   dest: distPath + "/css/",
   watch: [
     "client/css/src/**/*.scss",
+    "!client/css/src/shared/sprites.*",
+  ],
+  dependsOn: [
+    "build:spritesheet:app",
   ],
   browsersync: bsApp,
 });
@@ -139,9 +143,30 @@ gulp.task("watch:css", [
   "watch:css:scss:app",
 ]);
 
+gft.generateTask("spritesheet", {
+  taskName: "app",
+  src: "client/sprites/*.png",
+  dest: distPath + "/css/",
+  destFileName: "spritesheet_",
+  spriteCSSFile: "client/css/src/shared/sprites.scss",
+  buildCSSTask: "build:css:scss:app",
+  watch: [
+    "client/sprites/*.png",
+  ],
+});
+
+gulp.task("build:spritesheet", [
+  "build:spritesheet:app",
+]);
+
+gulp.task("watch:spritesheet", [
+  "watch:spritesheet:app",
+]);
+
 gulp.task("build", [
   "build:js",
   "build:css",
+  "build:spritesheet",
 ]);
 
 gulp.task("serve", [], function () {
@@ -214,6 +239,7 @@ gulp.task("watch:initBrowserify:test", function (done) {
 gulp.task("watch", [
   "watch:js",
   "watch:css",
+  "watch:spritesheet",
   "watch:initBrowserify",
   "serve",
   "watch:test:karma",
