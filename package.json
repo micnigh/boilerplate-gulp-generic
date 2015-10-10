@@ -13,11 +13,20 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "browser-sync": "^2.9.8",
+    "chai": "^3.3.0",
     "es5-shim": "^4.1.14",
     "eslint": "^1.6.0",
     "gulp": "^3.9.0",
     "gulp-frontend-tasks": "micnigh/gulp-frontend-tasks",
     "gulp-nodemon": "^2.0.4",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.10",
+    "karma-jasmine": "^0.3.6",
+    "karma-jasmine-html-reporter": "^0.1.8",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-source-map-support": "^1.1.0",
+    "karma-spec-reporter": "0.0.20",
+    "phantomjs": "^1.9.18",
     "underscore": "^1.8.3",
     "yargs": "^3.26.0"
   }
