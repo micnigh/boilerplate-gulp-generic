@@ -5,8 +5,8 @@ Boilerplate gulp project meant to be a good starting point for any type of app.
 ## Quick start
 
 ```bash
-git clone https://github.com/micnigh/boilerplate-gulp-generic
-cd boilerplate-gulp-generic
+git clone https://github.com/micnigh/boilerplate-gulp-generic new-awesome-project
+cd new-awesome-project
 rm -rf .git
 git init .
 git add -A
