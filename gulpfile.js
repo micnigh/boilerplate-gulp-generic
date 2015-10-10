@@ -124,10 +124,10 @@ gulp.task("watch:js", [
   "watch:js:test",
 ]);
 
-gft.generateTask("css:less", {
+gft.generateTask("css:scss", {
   taskName: "app",
   entries: [
-    "client/css/src/*.less",
+    "client/css/src/*.scss",
   ],
   includes: [
     "client/css/src/",
@@ -135,46 +135,22 @@ gft.generateTask("css:less", {
   ],
   dest: distPath + "/css/",
   watch: [
-    "client/css/src/**/*.less",
-    "!client/css/src/shared/sprites.less",
+    "client/css/src/**/*.scss",
   ],
   browsersync: bsApp,
-  dependsOn: [
-    "build:spritesheet:less:app",
-  ],
 });
 
 gulp.task("build:css", [
-  "build:css:less:app",
+  "build:css:scss:app",
 ]);
 
 gulp.task("watch:css", [
-  "watch:css:less:app",
-]);
-
-gft.generateTask("spritesheet:less", {
-  taskName: "app",
-  src: "client/sprites/*.png",
-  dest: distPath + "/css/",
-  destFileName: "spritesheet_",
-  lessSpriteFile: "client/css/src/shared/sprites.less",
-  watch: [
-    "client/sprites/*.png",
-  ],
-});
-
-gulp.task("build:spritesheet", [
-  "build:spritesheet:less:app",
-]);
-
-gulp.task("watch:spritesheet", [
-  "watch:spritesheet:less:app",
+  "watch:css:scss:app",
 ]);
 
 gulp.task("build", [
   "build:js",
   "build:css",
-  "build:spritesheet",
 ]);
 
 gulp.task("serve", [], function () {
@@ -247,7 +223,6 @@ gulp.task("watch:initBrowserify:test", function (done) {
 gulp.task("watch", [
   "watch:js",
   "watch:css",
-  "watch:spritesheet",
   "watch:initBrowserify",
   "serve",
   "watch:test:karma",
