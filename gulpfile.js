@@ -154,7 +154,7 @@ gulp.task("serve", [], function () {
       "server/public/css/*.css*",
     ],
     script: "server/index.js",
-    ext: "js html",
+    ext: "js",
   });
 });
 
