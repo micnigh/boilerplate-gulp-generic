@@ -6,6 +6,8 @@ var karma = require("karma");
 
 var gft = require("gulp-frontend-tasks")(gulp);
 
+require("babel/register");
+
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 var bsApp = browsersync.create();
@@ -183,7 +185,7 @@ gulp.task("serve", [], function () {
   });
 });
 
-gulp.task("test:karma", [
+gulp.task("test:browser", [
   "build:js:testLib",
   "build:js:test",
 ], function (done) {
@@ -193,7 +195,7 @@ gulp.task("test:karma", [
   }, done).start();
 });
 
-gulp.task("watch:test:karma", [
+gulp.task("watch:test:browser", [
   "build:js:testLib",
   "build:js:test",
 ], function (done) {
@@ -203,8 +205,23 @@ gulp.task("watch:test:karma", [
   }, done).start();
 });
 
+require("./tasks/test/node").generateTask({
+  taskName: "test:node",
+});
+
+require("./tasks/watch/test/node").generateTask({
+  taskName: "watch:test:node",
+  dependsOn: [ "test:node" ],
+});
+
 gulp.task("test", [
-  "test:karma",
+  "test:browser",
+  "test:node",
+]);
+
+gulp.task("watch:test", [
+  "watch:test:browser",
+  "watch:test:node",
 ]);
 
 gulp.task("watch:initBrowserify", [
@@ -242,7 +259,7 @@ gulp.task("watch", [
   "watch:spritesheet",
   "watch:initBrowserify",
   "serve",
-  "watch:test:karma",
+  "watch:test",
 ]);
 
 gulp.task("default", ["watch"]);

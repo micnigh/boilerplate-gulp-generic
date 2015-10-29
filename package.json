@@ -10,6 +10,7 @@
     "url": "https://github.com/micnigh/boilerplate-gulp-generic"
   },
   "dependencies": {
+    "babel": "^5.8.23",
     "body-parser": "^1.14.1",
     "compression": "^1.6.0",
     "express": "^4.13.3"
@@ -19,9 +20,14 @@
     "chai": "^3.3.0",
     "es5-shim": "^4.1.14",
     "eslint": "^1.6.0",
+    "eslint-plugin-babel": "^2.1.1",
+    "event-stream": "^3.3.2",
     "gulp": "^3.9.0",
     "gulp-frontend-tasks": "micnigh/gulp-frontend-tasks",
+    "gulp-jasmine": "^2.1.0",
     "gulp-nodemon": "^2.0.4",
+    "gulp-plumber": "^1.0.1",
+    "gulp-watch": "^4.3.5",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.10",
     "karma-jasmine": "^0.3.6",
