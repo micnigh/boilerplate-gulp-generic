@@ -6,7 +6,11 @@ var karma = require("karma");
 
 var gft = require("gulp-frontend-tasks")(gulp);
 
-require("babel/register");
+require("regenerator/runtime");
+require("babel-core/register")({
+  presets: ["babel-preset-es2015"],
+  plugins: ["syntax-async-functions", "transform-regenerator"],
+});
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
@@ -24,6 +28,8 @@ var libs = [
   "underscore",
   "es5-shim/es5-shim",
   "es5-shim/es5-sham",
+  "bluebird",
+  "regenerator/runtime",
 ];
 
 var testLibs = [
@@ -42,6 +48,13 @@ gft.generateTask("js", {
   destFileName: "lib.js",
   browserify: {
     requires: libs,
+    transforms: {
+      babelify: {
+        presets: [
+          require("babel-preset-es2015")
+        ],
+      },
+    },
   },
   watch: [
     "client/js/libs/entry.js",
@@ -60,6 +73,17 @@ gft.generateTask("js", {
   ],
   browserify: {
     externals: libs,
+    transforms: {
+      babelify: {
+        presets: [
+          require("babel-preset-es2015"),
+        ],
+        plugins: [
+          require("babel-plugin-transform-regenerator"),
+          require("babel-plugin-syntax-async-functions"),
+        ],
+      },
+    },
   },
   watch: [
     "client/js/src/*.js",
@@ -79,6 +103,13 @@ gft.generateTask("js", {
   destFileName: "testLib.js",
   browserify: {
     requires: testLibs,
+    transforms: {
+      babelify: {
+        presets: [
+          require("babel-preset-es2015"),
+        ],
+      },
+    },
   },
   watch: [
     "client/js/test/libs/entry.js",
@@ -98,6 +129,17 @@ gft.generateTask("js", {
   ],
   browserify: {
     externals: libs.concat(testLibs),
+    transforms: {
+      babelify: {
+        presets: [
+          require("babel-preset-es2015"),
+        ],
+        plugins: [
+          require("babel-plugin-transform-regenerator"),
+          require("babel-plugin-syntax-async-functions"),
+        ],
+      },
+    },
   },
   watch: [
     "client/js/test/src/**/*.js",
